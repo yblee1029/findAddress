@@ -1,0 +1,80 @@
+buildscript {
+	ext {
+		buildVersion = "0.0.1-SNAPSHOT"
+		springBootVersion = '2.1.6.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("io.spring.gradle:dependency-management-plugin:1.0.6.RELEASE")
+		classpath("net.ltgt.gradle:gradle-apt-plugin:0.21")
+	}
+}
+
+
+plugins {
+	id 'org.springframework.boot' version '2.1.6.RELEASE'
+	id 'java'
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'net.ltgt.apt'
+apply plugin: 'war'
+
+
+jar {
+	baseName = "findAddress"
+	//version = "${buildVersion}"
+	version = ""
+	manifest {
+		attributes 'Title': 'Request And Header Tester',
+					'Version': 1.0,
+					'Main-Class': 'com.findAddress.FindAddressApplication'
+	}
+	from {
+		configurations.compile.collect {
+			it.isDirectory()? it : zipTree(it)
+		}
+	}
+}
+
+group = 'com.findAddress'
+version = ''
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+	maven { url "https://plugins.gradle.org/m2/" }
+}
+
+configurations {
+	providedRuntime
+}
+
+dependencies {
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.0.5.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.0.5.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.0.5.RELEASE'
+    compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version:'1.3.2'
+    compile group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version:'1.9.13'
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version:'1.1.1'
+    compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+    compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '8.0.36'
+    compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version:'2.0.5.RELEASE'
+	runtimeOnly group: 'com.h2database', name: 'h2', version: '1.4.197'
+	testCompile group: 'junit', name: 'junit', version: '4.12' 
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.0.5.RELEASE'
+    testCompile group: 'org.springframework.security', name: 'spring-security-test', version: '5.0.4.RELEASE'
+}
+
+
+test {
+	ignoreFailures = true
+}

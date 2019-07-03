@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns="http://www.padual.com/java/logback.xsd"
+               scan="true" scanPeriod="30 seconds">
+
+    <appender name="logfile" class="ch.qos.logback.core.FileAppender">
+        <file>${catalina.home}/logs/findAddress/findAddressTest.log</file>
+        <append>true</append>
+        <encoder>
+            <Pattern>[%d{YYYY-MM-dd HH:mm:ss}] [%-5p] [%F:%L] %m%n</Pattern>
+        </encoder>
+    </appender>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>[%d{YYYY-MM-dd HH:mm:ss}] [%-5p] [%F:%L] %m%n</Pattern>
+        </layout>
+    </appender>
+    
+    <!-- logfile | console -->
+    
+    <!-- TRACE | DEBUG | INFO | WARN | ERROR -->
+ 
+     <!-- Spring Framework -->
+    <logger name="org.springframework" level="ERROR" />
+     
+     <!-- DB -->
+    <logger name="java.sql" level="INFO" />
+    <logger name="java.sql.ResultSet" level="INFO" />
+
+    <!-- ROOT -->
+    <root level="DEBUG">
+        <appender-ref ref="console" />
+    </root>
+    
+</configuration>
