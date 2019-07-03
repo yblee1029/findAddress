@@ -8,4 +8,4 @@
 **빌드 결과물**
 * URL : https://github.com/yblee1029/Executable
 * 실행방법 : java -jar findAddress.war
-* war 배포 사유 : jsp 파일 적용을 위해 사용하였습니다.
+* war 배포 사유 : jsp 파일 적용을 위해 사용
